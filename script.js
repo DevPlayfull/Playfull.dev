@@ -108,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const names = [
-    "Playfull_Dev",
+    "DevPlayfull",
     "Digital PXL",
     "DP_Playfull",
-    "DP_Playfull_Dev",
+    "DP_DevPlayfull",
     "jake"
 
   ];
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "owner of Fairmont Studio",
 
     "mechanical keyboards",
-    "contacting the mothership",
+    "calculator",
 
     "i hate scripts",
 
@@ -353,14 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { x: 100, opacity: 0 },
             { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
           );
-          gsap.to(blenderBar, { width: '75%', duration: 2, ease: 'power2.out' });
+          gsap.to(blenderBar, { width: '55%', duration: 2, ease: 'power2.out' });
           gsap.to(javaBar, { width: '35%', duration: 2, ease: 'power2.out' });
           gsap.to(unrealBar, { width: '1%', duration: 2, ease: 'power2.out' });
           gsap.to(htmlBar, { width: '65%', duration: 2, ease: 'power2.out' });
           gsap.to(javascriptBar, { width: '75%', duration: 2, ease: 'power2.out' });
           gsap.to(nodejsBar, { width: '70%', duration: 2, ease: 'power2.out' });
-          gsap.to(luaBar, { width: '75%', duration: 2, ease: 'power2.out' });
-          gsap.to(csharpBar, { width: '100%', duration: 2, ease: 'power2.out' });
+          gsap.to(luaBar, { width: '20%', duration: 2, ease: 'power2.out' });
+          gsap.to(csharpBar, { width: '15%', duration: 2, ease: 'power2.out' });
         }
       });
       resultsHint.classList.remove('hidden');
@@ -400,13 +400,13 @@ document.addEventListener('DOMContentLoaded', () => {
             { x: 100, opacity: 0 },
             { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
           );
-          gsap.to(blenderBar, { width: '75%', duration: 2, ease: 'power2.out' });
+          gsap.to(blenderBar, { width: '55%', duration: 2, ease: 'power2.out' });
           gsap.to(javaBar, { width: '35%', duration: 2, ease: 'power2.out' });
           gsap.to(unrealBar, { width: '1%', duration: 2, ease: 'power2.out' });
           gsap.to(htmlBar, { width: '65%', duration: 2, ease: 'power2.out' });
           gsap.to(javascriptBar, { width: '45%', duration: 2, ease: 'power2.out' });
           gsap.to(nodejsBar, { width: '70%', duration: 2, ease: 'power2.out' });
-          gsap.to(luaBar, { width: '40%', duration: 2, ease: 'power2.out' });
+          gsap.to(luaBar, { width: '20%', duration: 2, ease: 'power2.out' });
           gsap.to(csharpBar, { width: '15%', duration: 2, ease: 'power2.out' });
         }
       });
