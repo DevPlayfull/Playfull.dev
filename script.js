@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "owner of Digital PXL",
 
     "403 forbidden",
+    "404 Not Found",
 
     "never underestimate yourself",
     "owner of Fairmont Studio",
