@@ -1,60 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>
-      Python Editor
-    </title>
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="lib/codemirror.min.css" />
-    <link rel="stylesheet" href="lib/codemirror-theme-dracula.min.css" />
-    <script src="lib/codemirror.min.js">
-    </script>
-    <script src="lib/codemirror-python.js">
-    </script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="top-row">
-      <h2>
-        DevPlayfull Python Editor 
-      "credit to mrlandman"
-      </h2>
-      <div class="button-group">
-        <button id="run-btn">
-          Run Code
-        </button>
-        <button id="stop-btn">
-          Stop
-        </button>
-        <button id="clear-btn">
-          Clear
-        </button>
-        <button id="save-btn">
-          Download
-        </button>
-        <button id="load-btn">
-          Upload
-        </button>
-        <input type="file" id="file-input" accept=".txt" style="display:none;" />
-      </div>
-    </div>
-    <div class="container">
-      <div class="editor-box">
-        <textarea id="editor">
-          import time
-import random
-
-for i in range(100):
-  num = random.randint(0,100)
-  print(num)
-  time.sleep(0.05)
-        </textarea>
-      </div>
-      <div id="output">
-      </div>
-    </div>
-    <script src="script.js">
-    </script>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>PyScript!</title>
+        <link
+            rel="stylesheet"
+            href="https://pyscript.net/releases/2026.7.3/core.css"
+        />
+        <script
+            type="module"
+            src="https://pyscript.net/releases/2026.7.3/core.js"
+        ></script>
+    </head>
+    <body>
+        <!-- type mpy (MicroPython) or py (Pyodide) to run some Python -->
+        <script type="mpy" terminal>
+            print("Hello, world!")
+        </script>
+    </body>
 </html>
