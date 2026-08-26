@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Python Editor</title>
+    <link rel="icon" href="images/favicon.png" />
+    
+    <link rel="stylesheet" href="lib/codemirror.min.css">
+    <link rel="stylesheet" href="lib/codemirror-theme-dracula.min.css">
+    <script src="lib/codemirror.min.js"></script>
+    <script src="lib/codemirror-python.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="top-row">
+        <h2>LHS Python Editor</h2>
+        <div class="button-group">
+            <button id="run-btn">Run Code</button>
+            <button id="stop-btn">Stop</button>
+            <button id="clear-btn">Clear</button>
+            <button id="save-btn">Download</button>
+            <button id="load-btn">Upload</button>
+
+            <input
+                type="file"
+                id="file-input"
+                accept=".py"
+                style="display:none;">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="editor-box">
+            <textarea id="editor">import time
+import random
+
+for i in range(100):
+  num = random.randint(0,100)
+  print(num)
+  time.sleep(0.05)
+</textarea>
+        </div>
+        
+        <div id="output"></div>
+    </div>
+
+    
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
