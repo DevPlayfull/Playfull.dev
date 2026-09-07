@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .calculator {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Calculator</h2>
+    
+    <div class="input-group">
+        <label for="num1">First Number:</label>
+        <input type="number" id="num1" placeholder="Enter first number">
+    </div>
+    
+    <div class="input-group">
+        <label for="operation">Operation:</label>
+        <select id="operation">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="x">x</option>
+            <option value="/">÷</option>
+        </select>
+    </div>
+    
+    <div class="input-group">
+        <label for="num2">Second Number:</label>
+        <input type="number" id="num2" placeholder="Enter second number">
+    </div>
+    
+    <button onclick="calculate()">Calculate</button>
+    
+    <div class="result" id="result">Result: 0</div>
+</div>
+
+<script>
+function calculate() {
+    // 1. Get values from the inputs
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const operation = document.getElementById('operation').value;
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const resultDiv = document.getElementById('result');
+
+    // Validation check
+    if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "Please enter valid numbers.";
+        return;
+    }
+
+    let answer;
+
+    // 2. Run the exact math logic from your Python code
+    if (operation === "+") {
+        answer = num1 + num2;
+    } else if (operation === "-") {
+        answer = num1 - num2;
+    } else if (operation === "x") {
+        answer = num1 * num2;
+    } else if (operation === "/") {
+        if (num2 === 0) {
+            resultDiv.textContent = "Error: Cannot divide by zero.";
+            return;
+        }
+        answer = num1 / num2;
+    } else {
+        resultDiv.textContent = "Invalid choice.";
+        return;
+    }
+
+    // 3. Display the answer on the screen
+    resultDiv.textContent = "Result: " + answer;
+}
+</script>
+
+</body>
+</html>
