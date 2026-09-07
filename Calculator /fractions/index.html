@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Calculator</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .calculator-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .calc-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .fraction-input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+        }
+
+        .fraction-input-group input {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 2px solid #ccc;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .fraction-input-group input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .fraction-line {
+            width: 100%;
+            height: 3px;
+            background-color: #333;
+            margin: 8px 0;
+            border-radius: 2px;
+        }
+
+        select {
+            font-size: 1.5rem;
+            padding: 8px;
+            border-radius: var(--border-radius);
+            border: 2px solid #ccc;
+            background-color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .equals-sign {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-color);
+            display: none;
+        }
+
+        .result-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .fraction-display {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        .frac-num {
+            border-bottom: 2px solid #333;
+            padding: 0 4px;
+        }
+
+        .frac-den {
+            padding: 0 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-card">
+    <h2>Fraction Calculator</h2>
+    
+    <div class="calc-container">
+        <!-- Fraction 1 -->
+        <div class="fraction-input-group">
+            <input type="number" id="num1" placeholder="Num" aria-label="Numerator 1">
+            <div class="fraction-line"></div>
+            <input type="number" id="den1" placeholder="Den" aria-label="Denominator 1">
+        </div>
+
+        <!-- Operator Selection -->
+        <select id="operator" aria-label="Operator">
+            <option value="add">+</option>
+            <option value="subtract">−</option>
+            <option value="multiply">×</option>
+            <option value="divide">÷</option>
+        </select>
+
+        <!-- Fraction 2 -->
+        <div class="fraction-input-group">
+            <input type="number" id="num2" placeholder="Num" aria-label="Numerator 2">
+            <div class="fraction-line"></div>
+            <input type="number" id="den2" placeholder="Den" aria-label="Denominator 2">
+        </div>
+
+        <div class="equals-sign">=</div>
+    </div>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <!-- Results Display -->
+    <div id="resultBox" class="result-box">
+        <div class="result-title">Result:</div>
+        <div id="outputContainer"></div>
+    </div>
+</div>
+
+<script>
+    // Greatest Common Divisor (Euclidean algorithm) to simplify fractions
+    function gcd(a, b) {
+        return b ? gcd(b, a % b) : Math.abs(a);
+    }
+
+    function calculate() {
+        // Parse user inputs
+        const n1 = parseInt(document.getElementById('num1').value);
+        const d1 = parseInt(document.getElementById('den1').value);
+        const n2 = parseInt(document.getElementById('num2').value);
+        const d2 = parseInt(document.getElementById('den2').value);
+        const op = document.getElementById('operator').value;
+        
+        const resultBox = document.getElementById('resultBox');
+        const output = document.getElementById('outputContainer');
+
+        // Validation: Ensure all fields are filled
+        if (isNaN(n1) || isNaN(d1) || isNaN(n2) || isNaN(d2)) {
+            alert("Please fill in all inputs with valid numbers.");
+            return;
+        }
+
+        // Validation: Denominator cannot be zero
+        if (d1 === 0 || d2 === 0) {
+            alert("Denominators cannot be zero.");
+            return;
+        }
+
+        let finalNum, finalDen;
+
+        // Perform the calculation based on chosen operation
+        switch(op) {
+            case 'add':
+                finalNum = (n1 * d2) + (n2 * d1);
+                finalDen = d1 * d2;
+                break;
+            case 'subtract':
+                finalNum = (n1 * d2) - (n2 * d1);
+                finalDen = d1 * d2;
+                break;
+            case 'multiply':
+                finalNum = n1 * n2;
+                finalDen = d1 * d2;
+                break;
+            case 'divide':
+                if (n2 === 0) {
+                    alert("Cannot divide by a fraction with a numerator of zero.");
+                    return;
+                }
+                finalNum = n1 * d2;
+                finalDen = d1 * n2;
+                break;
+        }
+
+        // Handle negative signs cleanly
+        if (finalDen < 0) {
+            finalNum = -finalNum;
+            finalDen = -finalDen;
+        }
+
+        // Simplify the fraction
+        const commonDivisor = gcd(finalNum, finalDen);
+        let simplifiedNum = finalNum / commonDivisor;
+        let simplifiedDen = finalDen / commonDivisor;
+
+        // Generate output representations
+        let htmlResponse = '';
+
+        // 1. Fraction Form Layout
+        if (simplifiedNum === 0) {
+            htmlResponse += `<strong>0</strong>`;
+        } else if (simplifiedDen === 1) {
+            htmlResponse += `<strong>${simplifiedNum}</strong>`;
+        } else {
+            htmlResponse += `
+                <div class="fraction-display">
+                    <span class="frac-num">${simplifiedNum}</span>
+                    <span class="frac-den">${simplifiedDen}</span>
+                </div>
+            `;
+
+            // 2. Mixed Number Form Layout (if it's an improper fraction)
+            if (Math.abs(simplifiedNum) > simplifiedDen) {
+                const whole = Math.trunc(simplifiedNum / simplifiedDen);
+                const remainder = Math.abs(simplifiedNum % simplifiedDen);
+                htmlResponse += `<br><br><strong>Mixed Number:</strong> ${whole} 
+                    <div class="fraction-display">
+                        <span class="frac-num">${remainder}</span>
+                        <span class="frac-den">${simplifiedDen}</span>
+                    </div>`;
+            }
+        }
+
+        // 3. Decimal Form
+        const decimalVal = (finalNum / finalDen).toFixed(4);
+        htmlResponse += `<br><br><strong>Decimal:</strong> ${parseFloat(decimalVal)}`;
+
+        // Render results
+        output.innerHTML = htmlResponse;
+        resultBox.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
